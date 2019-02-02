@@ -1,0 +1,9 @@
+[submodule "esp-scripts"]
+	path = esp-scripts
+	url = git@github.com:marcov/esp-scripts.git
+[submodule "bin2c"]
+	path = bin2c
+	url = https://github.com/marcov/bin2c.git
+[submodule "src/esp-libs"]
+	path = src/esp-libs
+	url = git@github.com:marcov/esp-libs.git
