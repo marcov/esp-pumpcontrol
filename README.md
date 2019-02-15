@@ -2,4 +2,4 @@
 
 ### Screenshot (mobile website)
 
-![screenshot](screenshot.png =500x)
+<img src="https://raw.githubusercontent.com/marcov/esp-pumpcontrol/master/screenshot.png" height="600px">
