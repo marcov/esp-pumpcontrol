@@ -138,31 +138,31 @@ static void serveFavIcon32() {
 
 static void serveJsonData(void)
 {
-    StaticJsonBuffer<512> jsonBuffer;
-    ArduinoJson::JsonObject& root = jsonBuffer.createObject();
-    char timeStr[40];
+    ArduinoJson::StaticJsonDocument<512> jsonDoc;
 
-    root["currentState"] = irrig.active;
-    root["onTimeout"]    = SWITCH_OFF_FAILSAFE_S;
+    jsonDoc["currentState"] = irrig.active;
+    jsonDoc["onTimeout"]    = SWITCH_OFF_FAILSAFE_S;
 
     //unsigned dd = irrig.timeOn / (3600*24);
     unsigned hh = (irrig.timeOn % (3600*24)) / 3600;
     unsigned mm = (irrig.timeOn % 3600) / 60;
     unsigned ss = (irrig.timeOn % 60);
+
+    char timeStr[40];
     sprintf(timeStr, "%02uh:%02um:%02us", hh, mm, ss);
-    root["timeOn"] = timeStr;
+    jsonDoc["timeOn"] = timeStr;
 
     unsigned dd = irrig.uptime / (3600*24);
     hh = (irrig.uptime % (3600*24)) / 3600;
     mm = (irrig.uptime % 3600) / 60;
     // unsigned ss = (irrig.uptime % 60);
     sprintf(timeStr, "%ug, %02uh:%02um", dd, hh, mm);
-    root["fwUptime"]     =  timeStr;
+    jsonDoc["fwUptime"] =  timeStr;
 
-    root["fwVersion"]    = "v" FW_VERSION " " __DATE__;
+    jsonDoc["fwVersion"] = "v" FW_VERSION " " __DATE__;
 
     String msg;
-    root.printTo(msg);
+    serializeJson(jsonDoc, msg);
     pHttpServer->send(200, "text/json", msg);
 }
 
