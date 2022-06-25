@@ -1,5 +1,4 @@
-/.piolibdeps/
-/.pioenvs/
+/.pio
 *.pyc
 *.swp
 *.kdev4
